@@ -1,0 +1,52 @@
+.title {
+  color: #FD2D01;
+  font-size: larger;
+  text-align:left;
+  width: 100%;
+}
+
+.description {
+  font-size: small;
+  overflow-wrap: break-word;
+}
+
+.pencilButton {
+  background-color: #4E5166;
+  color: #FD2D01;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+}
+
+.trashButton {
+  background-color: #FD2D01;
+  color: #4E5166;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin: 20px;
+  cursor: pointer;
+
+}
+
+.likeButton {
+  background-color:#4E5166;
+  color: #FD2D01;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+
+}
+
+.imageUrl {
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.buttonDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}

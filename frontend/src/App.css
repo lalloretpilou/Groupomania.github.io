@@ -1,0 +1,161 @@
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato'), url(./fonts/Lato-Regular.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'LatoLight';
+  src: local('Lato'), url(./fonts/Lato-Light.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Lato900';
+  font-weight: 900;
+  src: local('Lato'), url(./fonts/Lato-Bold.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Lato900BL';
+  font-weight: 900;
+  src: local('Lato'), url(./fonts/Lato-Black.ttf) format('opentype');
+}
+
+.App {
+  text-align: center;
+  background-color: #F5F5F5;
+}
+
+.App-logo {
+  padding: 5px;
+  width: 150px;
+  cursor: pointer;
+  background-color: #F5F5F5;
+  color: #F5F5F5;
+  background-color: transparent;
+}
+.App-header {
+  height: 250px;
+  background-color: #F5F5F5;
+}
+.ConnectionDivision {
+  background-color:#F5F5F5 ;
+  height: 400px;
+  width: 800px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}
+
+
+.form {
+  background-color: #F5F5F5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  margin: 10px;
+}
+
+.input {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+input:hover {
+  color: #fd2d01;
+}
+.formText {
+  margin: 10px;
+}
+
+.App-link {
+  color: #fd2d01;
+}
+
+.App-body {
+  display: flex;
+  min-height: 500px;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+.App-footer {
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #4e5166;
+}
+
+.loginButton {
+  min-height: 190px;
+  min-width: 190px;
+  font-family: 'Lato900BL';
+  font-size: 22px;
+  background-color: #484c65;
+  color: #fd2d01;
+  border-radius: 10%;
+  border-color: #fd2d01;
+  margin: 15px;
+}
+
+.signUpButton {
+  min-height: 190px;
+  min-width: 190px;
+  font-family: 'Lato900BL';
+  font-size: 22px;
+  background-color: #484c65;
+  color: #fd2d01;
+  border-radius: 10%;
+  border-color: #fd2d01;
+  margin: 15px;
+}
+
+.titlePage {
+  font-family: 'Lato900BL';
+  font-size: 21px;
+  color: #484c65;
+}
+.bodyPage {
+  font-family: 'Lato';
+  font-size: 18px;
+}
+
+.bodyFooter {
+  font-family: 'Lato';
+  font-size: 14px;
+}
+
+.titleConnection {
+  font-family: 'Lato900BL';
+  font-size: 32px;
+  color: #fd2d01;
+}
+
+.loginDivision,
+.signUpDivision {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .loginDivision,
+  .signUpDivision {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .ConnectionDivision {
+    background-color:#F5F5F5 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    height:100%;
+    width: 100%;
+  }
+}

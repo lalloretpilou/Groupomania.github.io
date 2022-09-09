@@ -1,0 +1,105 @@
+.post {
+  display: flex;
+  padding: 10px;
+  width: 500px;
+  margin: 35px;
+  flex-direction: column;
+  text-align: justify;
+  align-items: center;
+  overflow-wrap: break-word;
+  border: solid;
+  border-color: #FD2D01;
+  border-radius: 20px;
+}
+.postDisp {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.buttonDiv {
+  display: flex;
+}
+.logoutButton:active,
+.logoutButton:focus,
+.logoutButton:hover {
+  background-color: #FD2D01;
+  color: #F5F5F5;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  margin: 20px;
+}
+.logoutButton {
+  color: #FD2D01;
+  background-color: #F5F5F5;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  margin: 20px;
+}
+.createPostButton:active,
+.createPostButton:focus,
+.createPostButton:hover {
+  background-color: green;
+  color: #F5F5F5;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  margin: 20px;
+}
+.createPostButton {
+  color: green;
+  background-color: #F5F5F5;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  margin: 20px;
+
+}
+.title {
+  font-family: 'Lato900BL';
+  font-size: 32px;
+  color: #fd2d01;
+}
+
+.description,
+.date {
+  color: #4E5166;
+  font-family: 'Lato';
+  font-size:medium;
+}
+.imageURL {
+  width: 400px;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .post {
+    display: flex;
+    align-items: center;
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 300px;
+    overflow-wrap: break-word;
+  }
+  .imageURL {
+    width: 250px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  .postDisp {
+    display: flex;
+    flex-direction: column;
+  }
+}

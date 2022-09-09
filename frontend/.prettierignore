@@ -1,0 +1,10 @@
+# Ignore artifacts:
+build
+
+# Ignore all HTML files:
+*.html
+
+# Ignore handlebars files:
+*.hbs
+
+node_modules
