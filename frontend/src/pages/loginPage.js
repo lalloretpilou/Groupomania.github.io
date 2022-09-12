@@ -50,7 +50,6 @@ const LoginPage = (props) => {
     })
       .then((res) => {
         if (res.status === 201) {
-          console.log(res);
           navigate('/home');
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('userId', res.data.userId);
