@@ -5,7 +5,8 @@ import Post from '../components/post';
 import { mongoObjectId } from '../utils';
 import './homePage.css';
 
-function HomePage(props) {
+const HomePage = (props) => {
+
   const [posts, setPosts] = React.useState([]); // state pour pouvoir mettre à jour l'affichage des posts
   const navigate = useNavigate();
 

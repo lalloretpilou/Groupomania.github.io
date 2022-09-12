@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './loginPage.css';
 
-function LoginPage(props) {
+const LoginPage = (props) => {
+
   const [emailSignUp, setEmailSignUp] = React.useState('');
   const [emailLogin, setEmailLogin] = React.useState('');
 

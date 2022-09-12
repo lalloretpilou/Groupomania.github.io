@@ -20,12 +20,13 @@ exports.createPost = (req, res) => {
         usersLiked: [],
         createdAt: new Date().getTime()
     };
-    console.log(postObject)
+    //console.log(postObject)
 
     const post = new Post({
         ...postObject,
     });
 
+    console.log()
     post.save()
         .then((post) => res.status(201).json({ post }))
         .catch(error => {
@@ -53,6 +54,7 @@ exports.getOnePost = (req, res) => {
 };
 
 exports.updatePost = (req, res, next) => {
+    console.log(req.body)
     const postObject = req.file ? {
         name: req.body.name,
         description: req.body.description,
@@ -66,16 +68,14 @@ exports.updatePost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res) => {
-
     Post.findOne({ _id: req.params.id })
         .then((post) => {
             if (post) {
                 if (post.userId != req.auth.userId
-                    || req.userId != '62d57f71fe167faf6133d10b') {
+                    || req.auth.userId != '62d57f71fe167faf6133d10b') {
                     res.status(401).json({ message: 'Vous n êtes pas autorisée' });
                 }
                 else {
-                    console.log(req.auth)
                     const filename = post.imageUrl.split('/images/')[1];
                     fs.unlink(`images/${filename}`, () => {
                         Post.deleteOne({ _id: req.params.id })

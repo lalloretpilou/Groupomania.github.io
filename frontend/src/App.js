@@ -4,13 +4,12 @@ import './App.css';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from './pages/loginPage';
 import HomePage from './pages/homePage';
-import { useNavigate } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="Groupomanie" onClick={<HomePage />}/>
+        <img src={logo} className="App-logo" alt="Groupomanie"/>
         <p className="titlePage">Votre nouvelle plateforme</p>
       </header>
       <div className="App-body">

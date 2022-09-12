@@ -5,6 +5,11 @@
   width: 100%;
 }
 
+.headerPost{
+  display: flex;
+  flex-direction: column;
+  margin-left: -150px;
+}
 .descriptionarea {
   font-size: small;
   overflow-wrap: break-word;

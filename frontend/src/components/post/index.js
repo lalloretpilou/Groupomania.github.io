@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MultilineInput } from 'react-input-multiline';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
@@ -8,8 +7,10 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import './index.css';
 
-function Post(props) {
+const Post = (props) => {
+
   const [isEdited, setIsEdited] = React.useState(props.name === "" && props.description === ""); // true if it's a new post , false otherwise
+  const [isNewPost, setIsNewPost] = React.useState(props.name === "" && props.description === "");
 
   const [name, setName] = React.useState(props.name);
   const [description, setDescription] = React.useState(props.description);
@@ -20,18 +21,18 @@ function Post(props) {
   const descriptionRef = React.useRef();
   const imageURLRef = React.useRef();
 
-  function isLiked() {
+  const isLiked = () => {
     return props.userLiked.includes(localStorage.getItem('userId'));
   }
 
-  function isOwn() {
+  const isOwn = () => {
     return (
       props.userId === localStorage.getItem('userId') ||
       localStorage.getItem('userId') === '62d57f71fe167faf6133d10b'
     );
   }
+  const newPost = (name, description, fileUploaded) => {
 
-  function newPost(name, description, fileUploaded) {
     let formData = new FormData();
     formData.append('Content-Type', "multipart/form-data");
     formData.append('_id', props.postId);
@@ -47,7 +48,8 @@ function Post(props) {
       },
     })
     .then((res) => {
-      if (res.status === 200) {
+      console.log(res.status)
+      if (res.status === 201) {
         console.log(`The post has been successfully created`);
         props.onUpdatePost({
           postId: props.postId,
@@ -64,10 +66,11 @@ function Post(props) {
       console.log(err);
     });
     return;
+  
   }
 
-  function editPost(name, description, fileUploaded) {
-
+  const editPost = (name, description, fileUploaded) => {
+    
     let formData = new FormData();
     formData.append('image', fileUploaded);
     formData.append('name', name);
@@ -101,7 +104,7 @@ function Post(props) {
         console.log(err);
       });
   }
-  function onLikePost() {
+  const onLikePost = () => {
     axios({
       method: 'put',
       url: `http://localhost:4000/api/posts/${props.postId}/like`,
@@ -123,8 +126,7 @@ function Post(props) {
         console.log(err);
       });
   }
-
-  function onDislikePost() {
+  const onDislikePost = () => {
     axios({
       method: 'put',
       url: `http://localhost:4000/api/posts/${props.postId}/like`,
@@ -146,9 +148,7 @@ function Post(props) {
         console.log(err);
       });
   }
-
-  function deletePost() {
-    console.log(props.postId)
+  const deletePost = () => {
     axios({
       method: 'delete',
       url: `http://localhost:4000/api/posts/${props.postId}`,
@@ -180,10 +180,10 @@ function Post(props) {
           onChange={(e) => setName(e.target.value)}
         />
       ) : (
-        <p className="title">{name}
+        <div className='headerPost'>
+        <p className="title">{name}</p>
         <p className="date"> Crée le {dayjs(props.createdAt).format('DD/MM/YYYY')}</p>
-        </p>
-        
+        </div>
       )}
       {isEdited ? (
         <input
@@ -201,22 +201,33 @@ function Post(props) {
         <input
           className="imageURL"
           ref={imageURLRef}
-          //value={imageURL.split('images/')[1]} // ERROR quand edited = true "This input element accepts a filename, which may only be programmatically set to the empty string."
           type="file"
           onChange={(e) => setFileUploaded(e.target.files[0])}
         />
       ) : imageURL ? (
-        <img className="imageURL" src={imageURL} title = {imageURL}></img>
+        <img className="imageURL" src={imageURL} title = {imageURL} alt = {imageURL}></img>
       ) : null}
 
-      {isEdited && (
+      {isEdited && isNewPost &&(
         <>
           <div
             className="createPostButton"
             onClick={() => newPost(name, description, fileUploaded)}
             title= "créer un post"
           >
-            OK
+            Créer
+          </div>
+        </>
+      )}
+
+      {isEdited && !isNewPost && (
+        <>
+          <div
+            className="createPostButton"
+            onClick={() => editPost(name, description, fileUploaded)}
+            title= "créer un post"
+          >
+            je modifie mon post
           </div>
         </>
       )}
@@ -237,7 +248,7 @@ function Post(props) {
         />
       )}
       {isOwn() && !isEdited && (
-        <BsPencil onClick={() => setIsEdited(true)} className="pencilButton" 
+        <BsPencil onClick={() => setIsNewPost(true)}  className="pencilButton" 
         title= "Je modifie le post"
         />
       )}
