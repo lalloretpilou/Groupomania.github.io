@@ -72,7 +72,7 @@ exports.deletePost = (req, res) => {
         .then((post) => {
             if (post) {
                 if (post.userId != req.auth.userId
-                    || req.auth.userId != '62d57f71fe167faf6133d10b') {
+                    && req.auth.userId != `${process.env.SUPERUSER}`) {
                     res.status(401).json({ message: 'Vous n êtes pas autorisée' });
                 }
                 else {

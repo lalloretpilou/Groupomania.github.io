@@ -28,7 +28,7 @@ const Post = (props) => {
   const isOwn = () => {
     return (
       props.userId === localStorage.getItem('userId') ||
-      localStorage.getItem('userId') === '62d57f71fe167faf6133d10b'
+      localStorage.getItem('userId') === `${process.env.SUPERUSER}`
     );
   }
   const newPost = (name, description, fileUploaded) => {
