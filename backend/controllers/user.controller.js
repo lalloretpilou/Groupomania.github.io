@@ -25,12 +25,14 @@ exports.signup = (req, res, next) => {
                                         { expiresIn: '24h' }
                                     )
                                 }))
-                                .catch(error => res.status(400).json({ error }));
+                                .catch(error => {
+                                    console.log(error)
+                                    res.status(400).json({ message: "email already exists" })
+                                });
                         })
                         .catch(error => res.status(500).json({ error }));
                 }
                 else {
-                    console.error({ email: req.body.email, password: req.body.password }, "one of theese mandatories is missing")
                     res.status(400).json({ message: "bad mandatory" })
                 }
             } else {

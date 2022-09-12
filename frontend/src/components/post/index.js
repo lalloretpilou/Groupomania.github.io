@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MultilineInput } from 'react-input-multiline';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
@@ -14,44 +15,10 @@ function Post(props) {
   const [description, setDescription] = React.useState(props.description);
   const [imageURL, setImageURL] = React.useState(props.imageURL);
   const [fileUploaded, setFileUploaded] = React.useState(null);
-  const [nameFocus, setNameFocus] = React.useState(false);
-  const [descriptionFocus, setDescriptionFocus] = React.useState(false);
-  const [imageURLFocus, setImageURLFocus] = React.useState(false);
-
+  
   const nameRef = React.useRef();
   const descriptionRef = React.useRef();
   const imageURLRef = React.useRef();
-
-  React.useEffect(() => {
-    const onPress = (event) => {
-      if (
-        event.key === 'Enter' &&
-        isEdited &&
-        (nameFocus || descriptionFocus || imageURLFocus)
-      ) {
-        editPost(name, description, fileUploaded);
-        nameRef.current.blur();
-        descriptionRef.current.blur();
-        imageURLRef.current.blur();
-        setIsEdited(false);
-      }
-    };
-
-    document.addEventListener('keydown', onPress);
-    return () => document.removeEventListener('keydown', onPress);
-  }, [
-    nameRef,
-    descriptionRef,
-    imageURLRef,
-    isEdited,
-    nameFocus,
-    descriptionFocus,
-    imageURLFocus,
-    name,
-    description,
-    imageURL,
-    fileUploaded,
-  ]);
 
   function isLiked() {
     return props.userLiked.includes(localStorage.getItem('userId'));
@@ -181,6 +148,7 @@ function Post(props) {
   }
 
   function deletePost() {
+    console.log(props.postId)
     axios({
       method: 'delete',
       url: `http://localhost:4000/api/posts/${props.postId}`,
@@ -192,6 +160,7 @@ function Post(props) {
         if (res.status === 200) {
           console.log(`The post has been successfully deleted`);
           props.onDelete(props.postId);
+          
         }
       })
       .catch((err) => {
@@ -208,8 +177,6 @@ function Post(props) {
           ref={nameRef}
           value={name}
           type="text"
-          onFocus={() => setNameFocus(true)}
-          onBlur={() => setNameFocus(false)}
           onChange={(e) => setName(e.target.value)}
         />
       ) : (
@@ -224,9 +191,7 @@ function Post(props) {
           placeholder='Description du post'
           ref={descriptionRef}
           value={description}
-          type="text"
-          onFocus={() => setDescriptionFocus(true)}
-          onBlur={() => setDescriptionFocus(false)}
+          type="textarea"
           onChange={(e) => setDescription(e.target.value)}
         />
       ) : (
@@ -238,8 +203,6 @@ function Post(props) {
           ref={imageURLRef}
           //value={imageURL.split('images/')[1]} // ERROR quand edited = true "This input element accepts a filename, which may only be programmatically set to the empty string."
           type="file"
-          onFocus={() => setImageURLFocus(true)}
-          onBlur={() => setImageURLFocus(false)}
           onChange={(e) => setFileUploaded(e.target.files[0])}
         />
       ) : imageURL ? (

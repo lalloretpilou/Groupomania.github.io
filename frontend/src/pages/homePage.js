@@ -47,6 +47,7 @@ function HomePage(props) {
 
   const handleDeletePost = (postId) => {
     setPosts(posts.filter((post) => post._id !== postId));
+
   };
 
   const handleLikePost = (postId) => {

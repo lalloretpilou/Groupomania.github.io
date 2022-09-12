@@ -11,18 +11,27 @@ exports.createPost = (req, res) => {
         likes: 0,
         usersLiked: [],
         createdAt: new Date().getTime()
-    } : { ...req.body };
+    } : {
+        userId: req.body.userId,
+        name: req.body.name,
+        description: req.body.description,
+        imageUrl: "",
+        likes: 0,
+        usersLiked: [],
+        createdAt: new Date().getTime()
+    };
     console.log(postObject)
 
     const post = new Post({
-        ...postObject,   
+        ...postObject,
     });
 
     post.save()
         .then((post) => res.status(201).json({ post }))
-        .catch(error => {console.log(error)
+        .catch(error => {
+            console.log(error)
             res.status(400).json({ error })
-    });
+        });
 };
 
 exports.getAllPost = (req, res) => {
@@ -52,66 +61,77 @@ exports.updatePost = (req, res, next) => {
     } : { ...req.body };
 
     Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
-    .then(() => res.status(200).json({ imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` }))
-    .catch(error => res.status(401).json({ error }));
+        .then(() => res.status(200).json({ imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` }))
+        .catch(error => res.status(401).json({ error }));
 };
 
 exports.deletePost = (req, res) => {
 
-    Post.deleteOne({ _id: req.params.id })
+    Post.findOne({ _id: req.params.id })
         .then((post) => {
-            console.log(post)
-            if (post.userId != req.auth.userId) {
-                res.status(401).json({ message: 'Vous n êtes pas autorisée' });
-            } else {
-                const filename = post.imageUrl.split('/images/')[1];
-                fs.unlink(`images/${filename}`, () => {
-                    Post.deleteOne({ _id: req.params.id })
-                        .then(() => { res.status(200).json({ message: 'Le post a été supprimé' }) })
-                        .catch(error => res.status(401).json({ error }));
-                });
+            if (post) {
+                if (post.userId != req.auth.userId
+                    || req.userId != '62d57f71fe167faf6133d10b') {
+                    res.status(401).json({ message: 'Vous n êtes pas autorisée' });
+                }
+                else {
+                    console.log(req.auth)
+                    const filename = post.imageUrl.split('/images/')[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        Post.deleteOne({ _id: req.params.id })
+                            .then(() => { res.status(200).json({ message: 'Le post a été supprimé' }) })
+                            .catch(error => {
+                                console.error(error)
+                                res.status(401).json({ error })
+                            });
+                    });
+                }
             }
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch(error => {
+            console.error(error)
+            res.status(500).json({ error })
+        });
 };
+
 
 exports.likePost = (req, res, next) => {
     if (req.body.like == true) {
-        Post.findOne({ _id: req.params.id }) 
-        .then((post) => {
-            if(!post.usersLiked.includes(req.body.userId)) {
-                Post.updateOne(
-                    { _id: req.params.id },
-                    {
-                        $inc: {
-                            likes: 1
-                        },
-                        $push: {usersLiked: req.body.userId}
-                    }
-                )
-                .then(() => res.status(201).json({ message: 'Vous aimé le post'}))
-                .catch((error) => res.status(400).json({ error }));
-            }
-        })
-    .catch((error) => res.status(400).json({ error }));
+        Post.findOne({ _id: req.params.id })
+            .then((post) => {
+                if (!post.usersLiked.includes(req.body.userId)) {
+                    Post.updateOne(
+                        { _id: req.params.id },
+                        {
+                            $inc: {
+                                likes: 1
+                            },
+                            $push: { usersLiked: req.body.userId }
+                        }
+                    )
+                        .then(() => res.status(201).json({ message: 'Vous aimé le post' }))
+                        .catch((error) => res.status(400).json({ error }));
+                }
+            })
+            .catch((error) => res.status(400).json({ error }));
     }
 
     if (req.body.like == false) {
         Post.findOne({ _id: req.params.id })
-        .then((post) => {
-            if(post.usersLiked.includes(req.body.userId)) {
-                Post.updateOne(
-                    { _id: req.params.id },
-                    {
-                        $inc: {
-                            likes: -1
-                        },
-                        $pull: {usersLiked: req.body.userId}
-                    }
-                )
-                .then(() => res.status(201).json({ message: 'Votre vote a ete mis a jour'}))
-                .catch((error) => res.status(400).json({ error }));
-            }
-        })
+            .then((post) => {
+                if (post.usersLiked.includes(req.body.userId)) {
+                    Post.updateOne(
+                        { _id: req.params.id },
+                        {
+                            $inc: {
+                                likes: -1
+                            },
+                            $pull: { usersLiked: req.body.userId }
+                        }
+                    )
+                        .then(() => res.status(201).json({ message: 'Votre vote a ete mis a jour' }))
+                        .catch((error) => res.status(400).json({ error }));
+                }
+            })
     }
 };

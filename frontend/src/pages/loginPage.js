@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './loginPage.css';
@@ -75,7 +74,7 @@ function LoginPage(props) {
                 id="email"
                 value={emailLogin}
                 onChange={(e) => setEmailLogin(e.target.value)}
-                tabindex="1"
+                tabIndex="1"
               />
             </label>
             <label className="formText">
@@ -86,14 +85,14 @@ function LoginPage(props) {
                 id="password"
                 value={passwordLogin}
                 onChange={(e) => setPasswordLogin(e.target.value)}
-                tabindex="2"
+                tabIndex="2"
               />
             </label>
             <input
               type="submit"
               value="Se connecter"
               className="button login__submit"
-              tabindex="3"
+              tabIndex="3"
             />
           </form>
         </div>
@@ -108,7 +107,7 @@ function LoginPage(props) {
                 id="email"
                 value={emailSignUp}
                 onChange={(e) => setEmailSignUp(e.target.value)}
-                tabindex="4"
+                tabIndex="4"
               />
             </label>
             <label className="formText">
@@ -119,14 +118,14 @@ function LoginPage(props) {
                 id="password"
                 value={passwordSignUp}
                 onChange={(e) => setPasswordSignUp(e.target.value)}
-                tabindex="5"
+                tabIndex="5"
               />
             </label>
             <input
               type="submit"
               value="S'inscrire"
               className="button login__submit"
-              tabindex="6"
+              tabIndex="6"
             />
           </form>
         </div>

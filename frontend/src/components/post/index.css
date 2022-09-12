@@ -5,9 +5,11 @@
   width: 100%;
 }
 
-.description {
+.descriptionarea {
   font-size: small;
   overflow-wrap: break-word;
+  border: #FD2D01;
+  border-width: 20px;
 }
 
 .pencilButton {
