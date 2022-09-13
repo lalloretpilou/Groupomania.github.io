@@ -27,8 +27,8 @@ const Post = (props) => {
 
   const isOwn = () => {
     return (
-      props.userId === localStorage.getItem('userId') ||
-      localStorage.getItem('userId') === `${process.env.SUPERUSER}`
+      props.userId === localStorage.getItem('userId') || 
+      localStorage.getItem('userId') === "62d57f71fe167faf6133d10b"
     );
   }
   const newPost = (name, description, fileUploaded) => {
@@ -208,7 +208,7 @@ const Post = (props) => {
         <img className="imageURL" src={imageURL} title = {imageURL} alt = {imageURL}></img>
       ) : null}
 
-      {isEdited && isNewPost &&(
+      {isEdited &&(
         <>
           <div
             className="createPostButton"
@@ -220,17 +220,6 @@ const Post = (props) => {
         </>
       )}
 
-      {isEdited && !isNewPost && (
-        <>
-          <div
-            className="createPostButton"
-            onClick={() => editPost(name, description, fileUploaded)}
-            title= "créer un post"
-          >
-            je modifie mon post
-          </div>
-        </>
-      )}
       <div className='buttonDiv'>
       {isLiked() && !isEdited ? (
         <AiFillHeart onClick={onDislikePost} className="likeButton"
@@ -248,7 +237,11 @@ const Post = (props) => {
         />
       )}
       {isOwn() && !isEdited && (
-        <BsPencil onClick={() => setIsNewPost(true)}  className="pencilButton" 
+        <BsPencil onClick={() => setIsEdited(true)
+          
+          () => setIsNewPost(false)
+
+        }  className="pencilButton" 
         title= "Je modifie le post"
         />
       )}
