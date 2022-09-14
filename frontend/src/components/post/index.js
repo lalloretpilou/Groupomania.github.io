@@ -208,7 +208,7 @@ const Post = (props) => {
         <img className="imageURL" src={imageURL} title = {imageURL} alt = {imageURL}></img>
       ) : null}
 
-      {isEdited &&(
+{isEdited && isNewPost &&(
         <>
           <div
             className="createPostButton"
@@ -216,6 +216,17 @@ const Post = (props) => {
             title= "créer un post"
           >
             Créer
+          </div>
+        </>
+      )}
+      {isEdited && !isNewPost &&(
+        <>
+          <div
+            className="createPostButton"
+            onClick={() => editPost(name, description, fileUploaded)}
+            title= "créer un post"
+          >
+            Mettre à jour
           </div>
         </>
       )}
@@ -237,10 +248,8 @@ const Post = (props) => {
         />
       )}
       {isOwn() && !isEdited && (
-        <BsPencil onClick={() => setIsEdited(true)
-          
-          () => setIsNewPost(false)
-
+        <BsPencil onClick={() => {setIsEdited(true)
+          setIsNewPost(false)}
         }  className="pencilButton" 
         title= "Je modifie le post"
         />

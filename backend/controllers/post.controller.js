@@ -53,18 +53,29 @@ exports.getOnePost = (req, res) => {
         .catch(error => res.status(404).json({ error }));
 };
 
-exports.updatePost = (req, res, next) => {
-    console.log(req.body)
+exports.updatePost = (req, res) => {
+
+    // création d'un objet post, afin de remplacer le contenu des variables du body.
     const postObject = req.file ? {
-        name: req.body.name,
-        description: req.body.description,
-        createdAt: req.body.createdAt,
+        ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
 
-    Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
-        .then(() => res.status(200).json({ imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` }))
-        .catch(error => res.status(401).json({ error }));
+    delete postObject._userId;
+    Post.findOne({ _id: req.params.id })
+        .then((post) => {
+            if (post.userId != req.auth.userId) {
+                res.status(401).json({ message: 'Vous n êtes pas autorisée' });
+            } else {
+                Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+                    .then(() => res.status(200).json({ message: 'Le post a bien été mise à jour' }))
+                    .catch(error => res.status(401).json({ error }));
+            }
+        })
+        .catch((error) => {
+            res.status(400).json({ error });
+        });
+
 };
 
 exports.deletePost = (req, res) => {
