@@ -6,6 +6,11 @@ import { BsPencil } from 'react-icons/bs';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import './index.css';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Fade from '@mui/material/Fade';
+import Slide from '@mui/material/Slide';
+import Grow from '@mui/material/Grow';
 
 const Post = (props) => {
 
@@ -31,6 +36,7 @@ const Post = (props) => {
       localStorage.getItem('userId') === "62d57f71fe167faf6133d10b"
     );
   }
+
   const newPost = (name, description, fileUploaded) => {
 
     let formData = new FormData();

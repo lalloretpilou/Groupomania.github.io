@@ -68,7 +68,10 @@ exports.updatePost = (req, res) => {
                 res.status(401).json({ message: 'Vous n êtes pas autorisée' });
             } else {
                 Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
-                    .then(() => res.status(200).json({ message: 'Le post a bien été mise à jour' }))
+                    .then((result) => {
+                        console.log(result)
+                        res.status(200).json({ message: 'Le post a bien été mise à jour' })
+                        })
                     .catch(error => res.status(401).json({ error }));
             }
         })
@@ -87,6 +90,8 @@ exports.deletePost = (req, res) => {
                     res.status(401).json({ message: 'Vous n êtes pas autorisée' });
                 }
                 else {
+                    if (post.imageUrl)
+                    {
                     const filename = post.imageUrl.split('/images/')[1];
                     fs.unlink(`images/${filename}`, () => {
                         Post.deleteOne({ _id: req.params.id })
@@ -96,6 +101,14 @@ exports.deletePost = (req, res) => {
                                 res.status(401).json({ error })
                             });
                     });
+                } else {
+                    Post.deleteOne({ _id: req.params.id })
+                    .then(() => { res.status(200).json({ message: 'Le post a été supprimé' }) })
+                    .catch(error => {
+                        console.error(error)
+                        res.status(401).json({ error })
+                    });
+                }
                 }
             }
         })
