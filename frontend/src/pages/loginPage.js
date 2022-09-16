@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './loginPage.css';
-import Snackbar from '@mui/material/Snackbar'
 
 const LoginPage = (props) => {
 
@@ -27,13 +26,13 @@ const LoginPage = (props) => {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res);
           navigate('/home');
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('userId', res.data.userId);
         }
       })
       .catch((err) => {
+        alert("Vérifiez votre email et mot de passe")
         console.log(err);
       });
   };
@@ -54,6 +53,7 @@ const LoginPage = (props) => {
           navigate('/home');
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('userId', res.data.userId);
+          alert("Votre compte a bien été crée")
         }
       })
       .catch((err) => {
@@ -98,7 +98,7 @@ const LoginPage = (props) => {
           </form>
         </div>
         <div className="signUpDivision">
-          <p className="titleConnection"> &gt; Créer un compte</p>
+          <p className="titleConnection" > &gt; Créer un compte</p>
           <form onSubmit={handleSubmitSignup} className="form">
             <label className="formText">
               <input

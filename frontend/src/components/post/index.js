@@ -6,11 +6,6 @@ import { BsPencil } from 'react-icons/bs';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import './index.css';
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import Fade from '@mui/material/Fade';
-import Slide from '@mui/material/Slide';
-import Grow from '@mui/material/Grow';
 
 const Post = (props) => {
 
@@ -93,6 +88,7 @@ const Post = (props) => {
       .then((res) => {
         if (res.status === 200) {
           console.log(`The post has been successfully updated`);
+          alert("Le post a bien été mis à jour")
           props.onUpdatePost({
             postId: props.postId,
             name: name,
@@ -192,11 +188,12 @@ const Post = (props) => {
         </div>
       )}
       {isEdited ? (
-        <input
+        <textarea
           className="description"
           placeholder='Description du post'
           ref={descriptionRef}
           value={description}
+          rows="5"
           type="textarea"
           onChange={(e) => setDescription(e.target.value)}
         />
