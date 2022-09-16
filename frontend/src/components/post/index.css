@@ -10,16 +10,10 @@
   flex-direction: column;
   margin-left: -150px;
 }
-.descriptionarea {
-  font-size: small;
-  overflow-wrap: break-word;
-  border: #FD2D01;
-  border-width: 20px;
-}
 
 .pencilButton {
   background-color: #4E5166;
-  color: #FD2D01;
+  color: whitesmoke;
   border-radius: 20px;
   padding: 10px;
   margin-bottom: 20px;
@@ -29,7 +23,7 @@
 
 .trashButton {
   background-color: #FD2D01;
-  color: #4E5166;
+  color: whitesmoke;
   border-radius: 20px;
   padding: 10px;
   margin-bottom: 20px;
@@ -40,7 +34,7 @@
 
 .likeButton {
   background-color:#4E5166;
-  color: #FD2D01;
+  color: whitesmoke;
   border-radius: 20px;
   padding: 10px;
   cursor: pointer;
@@ -52,8 +46,14 @@
   padding: 10px;
   margin-bottom: 20px;
 }
+
 .buttonDiv {
   display: flex;
   flex-direction: row;
   align-items: baseline;
+}
+
+.input {
+  margin: 10px;
+  color: #FD2D01;
 }

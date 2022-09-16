@@ -4,7 +4,6 @@
   width: 500px;
   margin: 35px;
   flex-direction: column;
-  text-align: justify;
   align-items: center;
   overflow-wrap: break-word;
   border: solid;
@@ -72,6 +71,7 @@
   color: #4E5166;
   font-family: 'Lato';
   font-size:medium;
+  text-rendering: auto;
 }
 .imageURL {
   width: 400px;

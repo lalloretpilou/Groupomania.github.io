@@ -174,7 +174,7 @@ const Post = (props) => {
     <div className={props.className}>
       {isEdited ? (
         <input
-          className="title"
+          className="input title"
           placeholder='Titre du post'
           ref={nameRef}
           value={name}
@@ -189,7 +189,7 @@ const Post = (props) => {
       )}
       {isEdited ? (
         <textarea
-          className="description"
+          className="input description"
           placeholder='Description du post'
           ref={descriptionRef}
           value={description}
@@ -202,7 +202,7 @@ const Post = (props) => {
       )}
       {isEdited ? (
         <input
-          className="imageURL"
+          className="input imageURL"
           ref={imageURLRef}
           type="file"
           onChange={(e) => setFileUploaded(e.target.files[0])}
