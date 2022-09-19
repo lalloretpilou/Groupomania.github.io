@@ -49,7 +49,6 @@ const Post = (props) => {
       },
     })
     .then((res) => {
-      console.log(res.status)
       if (res.status === 201) {
         console.log(`The post has been successfully created`);
         props.onUpdatePost({
@@ -87,7 +86,6 @@ const Post = (props) => {
       })
       .then((res) => {
         if (res.status === 200) {
-          console.log(`The post has been successfully updated`);
           alert("Le post a bien été mis à jour")
           props.onUpdatePost({
             postId: props.postId,
@@ -102,7 +100,6 @@ const Post = (props) => {
       })
       .catch((err) => {
         setIsEdited(false);
-
         console.log(err);
       });
   }
@@ -162,7 +159,6 @@ const Post = (props) => {
         if (res.status === 200) {
           console.log(`The post has been successfully deleted`);
           props.onDelete(props.postId);
-          
         }
       })
       .catch((err) => {

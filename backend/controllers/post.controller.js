@@ -57,7 +57,6 @@ exports.updatePost = (req, res) => {
 
     // création d'un objet post, afin de remplacer le contenu des variables du body.
     const postObject = req.file ? {
-        ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
 

@@ -8,7 +8,7 @@
 .headerPost{
   display: flex;
   flex-direction: column;
-  margin-left: -150px;
+  text-align: center;
 }
 
 .pencilButton {
