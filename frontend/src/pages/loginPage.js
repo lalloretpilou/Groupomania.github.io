@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './loginPage.css';
 
+// Cette page sera la première à s'afficher. Elle permet de soit s'inscrire soit créer son compte.
+// Apres l'action de l'utilisateur, il sera directement redirigé vers la homepage
+
 const LoginPage = (props) => {
 
   const [emailSignUp, setEmailSignUp] = React.useState('');

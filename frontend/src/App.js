@@ -5,6 +5,9 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from './pages/loginPage';
 import HomePage from './pages/homePage';
 
+// Fichier principal. Il permet de relier les routes (pages) du site.
+// J'ai créer un header et footer dans ce fichier afin qu'il soit présent sur toutes les pages sans devoir les réecrire.
+
 const App = () => {
   return (
     <div className="App">

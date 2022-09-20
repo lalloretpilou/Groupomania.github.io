@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillCheckCircle, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import './index.css';
 
+
+// Dans ce fichier, il y a toutes les fonctions qui permetent de faire les actions sur les posts
+// Vous pouvez modifier, créer, liker, modifier les posts
+// Chaque valeur sont des 'state' ce qui permet de rafraichir directement l'interface avec la veleur correcte.
+// 
 const Post = (props) => {
 
-  const [isEdited, setIsEdited] = React.useState(props.name === "" && props.description === ""); // true if it's a new post , false otherwise
+  const [isEdited, setIsEdited] = React.useState(props.name === "" && props.description === "");
   const [isNewPost, setIsNewPost] = React.useState(props.name === "" && props.description === "");
 
   const [name, setName] = React.useState(props.name);
