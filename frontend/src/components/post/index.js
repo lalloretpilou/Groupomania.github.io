@@ -28,7 +28,7 @@ const Post = (props) => {
   const isOwn = () => {
     return (
       props.userId === localStorage.getItem('userId') || 
-      localStorage.getItem('userId') === "62d57f71fe167faf6133d10b"
+      localStorage.getItem('userId') === "63281d3c73867ee5b40c0281"
     );
   }
 
@@ -117,7 +117,7 @@ const Post = (props) => {
     })
       .then((res) => {
         if (res.status === 201) {
-          console.log(`You like the like`);
+          console.log(`You like the post`);
           props.onLikePost(props.postId);
         }
       })

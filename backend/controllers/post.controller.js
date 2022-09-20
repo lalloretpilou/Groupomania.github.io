@@ -63,7 +63,8 @@ exports.updatePost = (req, res) => {
     delete postObject._userId;
     Post.findOne({ _id: req.params.id })
         .then((post) => {
-            if (post.userId != req.auth.userId) {
+            if (post.userId != req.auth.userId
+                && req.auth.userId != `${process.env.SUPERUSER}`) {
                 res.status(401).json({ message: 'Vous n êtes pas autorisée' });
             } else {
                 Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
@@ -118,7 +119,7 @@ exports.deletePost = (req, res) => {
 };
 
 
-exports.likePost = (req, res, next) => {
+exports.likePost = (req, res) => {
     if (req.body.like == true) {
         Post.findOne({ _id: req.params.id })
             .then((post) => {
